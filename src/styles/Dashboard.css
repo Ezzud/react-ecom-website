@@ -1,0 +1,24 @@
+.dashboard-container {
+    display: flex;
+    align-items: stretch; /* Make the menu take all the height */
+}
+
+.dashboard-menu {
+    width: 25%;
+    padding: 20px;
+    background-color: #f8f9fa;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; /* Center the buttons vertically */
+    align-items: center; /* Center the buttons horizontally */
+}
+
+.dashboard-menu .btn {
+    width: 100%;
+    margin-bottom: 10px;
+}
+
+.dashboard-content {
+    width: 75%;
+    padding: 20px;
+}

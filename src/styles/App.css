@@ -61,6 +61,12 @@ body {
   transform: scale(1.1);
 }
 
+/* Basket item styles */
+.basket-item-avatar {
+  width: 90%;
+  border-radius: 5%;
+}
+
 /* Offcanvas styles */
 .offcanvas {
   display: none;
@@ -83,7 +89,56 @@ body {
 }
 
 .offcanvas-header {
-  display: none; /* Hide the header to remove the close button */
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px;
+  border-bottom: 1px solid #ddd;
+}
+
+/* Profile drawer styles */
+.profile-drawer .offcanvas-header {
+  background-color: #f8f9fa;
+}
+
+.profile-drawer .offcanvas-title {
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.profile-drawer .close {
+  font-size: 1.5rem;
+  cursor: pointer;
+  border: none; /* Remove border */
+  background: none; /* Remove background */
+}
+
+.profile-drawer .offcanvas-body .btn {
+  width: 100%;
+  margin-bottom: 10px; /* Ensure buttons are not on the same height */
+}
+
+/* Basket drawer styles */
+.basket-drawer {
+  max-height: 80%; /* Limit the maximum height */
+  overflow-y: auto; /* Add scroll if content overflows */
+}
+
+.basket-drawer .offcanvas-body {
+  padding: 15px;
+  height: auto; /* Set height to auto to fit content */
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.basket-drawer .basket-items {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+
+.basket-drawer .basket-footer {
+  margin-top: 10px;
 }
 
 /* Preview drawer styles */

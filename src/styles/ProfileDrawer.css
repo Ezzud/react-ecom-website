@@ -1,0 +1,56 @@
+/* Offcanvas styles */
+.offcanvas {
+    display: none;
+    position: fixed;
+    top: 68px; /* Adjust based on navbar height */
+    right: -300px; /* Start offscreen */
+    width: 300px;
+    background-color: lightgray;
+    z-index: 1045;
+    box-shadow: none; /* Remove shadow */
+    transition: right 0.6s ease-in-out; /* Increase transition duration */
+  }
+  
+  .offcanvas.show {
+    display: block;
+    right: 0; /* Slide in */
+  }
+  
+  .offcanvas.hide {
+    right: -300px; /* Slide out */
+  }
+  
+  .offcanvas-body {
+    padding: 15px;
+    height: auto; /* Set height to auto to fit content */
+  }
+  
+  .offcanvas-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  /* Profile drawer styles */
+  .profile-drawer .offcanvas-header {
+    background-color: #f8f9fa;
+  }
+  
+  .profile-drawer .offcanvas-title {
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .profile-drawer .close {
+    font-size: 1.5rem;
+    cursor: pointer;
+    border: none; /* Remove border */
+    background: none; /* Remove background */
+  }
+  
+  .profile-drawer .offcanvas-body .btn {
+    width: 100%;
+    margin-bottom: 10px; /* Ensure buttons are not on the same height */
+  }
