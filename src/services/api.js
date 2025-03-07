@@ -1,6 +1,181 @@
 import User from '../models/User';
 const ROOT_URL = 'http://localhost:3333';
 
+/**
+ * Fetch all orders
+ * 
+ * @returns {Promise<Array>} orders
+ */
+export const fetchOrders = async () => {
+    try {
+      const response = await fetch(`${ROOT_URL}/orders/all`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch orders');
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching orders:', error);
+      return [];
+    }
+  };
+  
+  /**
+   * Delete an order by ID
+   * 
+   * @param {string} orderId
+   * @returns {Promise<void>}
+   */
+  export const deleteOrder = async (orderId) => {
+    try {
+      const response = await fetch(`${ROOT_URL}/orders/${orderId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to delete order');
+      }
+    } catch (error) {
+      console.error('Error deleting order:', error);
+    }
+  };
+  
+  /**
+   * Update an order
+   * 
+   * @param {Object} order
+   * @returns {Promise<void>}
+   */
+  export const updateOrder = async (order) => {
+    try {
+      const response = await fetch(`${ROOT_URL}/orders/${order.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(order),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update order');
+      }
+    } catch (error) {
+      console.error('Error updating order:', error);
+    }
+  };
+
+/**
+ * Delete an item by ID
+ * 
+ * @param {string} itemId
+ * @returns {Promise<void>}
+ */
+export const deleteItem = async (itemId) => {
+    try {
+      const response = await fetch(`${ROOT_URL}/items/${itemId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to delete item');
+      }
+    } catch (error) {
+      console.error('Error deleting item:', error);
+    }
+  };
+  
+  /**
+   * Update an item
+   * 
+   * @param {Object} item
+   * @returns {Promise<void>}
+   */
+  export const updateItem = async (item) => {
+    try {
+      const response = await fetch(`${ROOT_URL}/items/${item.id}`, {
+        method: 'PUT',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(item),
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to update item');
+      }
+    } catch (error) {
+      console.error('Error updating item:', error);
+    }
+  };
+/**
+ * Fetch all users
+ * 
+ * @returns {Promise<Array>} users
+ */
+export const getUsers = async () => {
+    try {
+      const response = await fetch(`${ROOT_URL}/users/all`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to fetch users');
+      }
+  
+      return await response.json();
+    } catch (error) {
+      console.error('Error fetching users:', error);
+      return [];
+    }
+  };
+  
+  /**
+   * Delete a user by ID
+   * 
+   * @param {string} userId
+   * @returns {Promise<void>}
+   */
+  export const deleteUser = async (userId) => {
+    try {
+      const response = await fetch(`${ROOT_URL}/users/${userId}`, {
+        method: 'DELETE',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+  
+      if (!response.ok) {
+        throw new Error('Failed to delete user');
+      }
+    } catch (error) {
+      console.error('Error deleting user:', error);
+    }
+  };
+  
+  /**
+   * Update a user
+   * 
+   * @param {Object} user
+   * @returns {Promise<void>}
+   */
+  export const updateUser = async (user) => {
+    // This function will be implemented later
+  };
 
 /**
  * Fetch all items

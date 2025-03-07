@@ -1,22 +1,25 @@
 import React, { useState, useEffect } from 'react';
 import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
-import './styles/App.css'; // Assuming you have the CSS in App.css
-import 'bootstrap-icons/font/bootstrap-icons.css'; // Import Bootstrap Icons
-import Login from './pages/Login'; // Import the Login component
-import Home from './pages/Home'; // Import the Home component
-import AccountSettings from './pages/AccountSettings'; // Import the AccountSettings component
-import ProfileDrawer from './components/ProfileDrawer'; // Import the ProfileDrawer component
-import BasketPreviewDrawer from './components/BasketPreviewDrawer'; // Import the BasketPreviewDrawer component
-import Basket from './pages/Basket'; // Import the Basket component
-import Dashboard from './pages/admin/Dashboard'; // Import the Dashboard component
+import './styles/App.css';
+import 'bootstrap-icons/font/bootstrap-icons.css';
+import Login from './pages/Login';
+import Home from './pages/Home';
+import AccountSettings from './pages/AccountSettings';
+import ProfileDrawer from './components/ProfileDrawer';
+import BasketPreviewDrawer from './components/BasketPreviewDrawer';
+import UserManager from './pages/admin/UserManager';
+import ItemManager from './pages/admin/ItemManager';
+import OrderManager from './pages/admin/OrderManager';
+import Basket from './pages/Basket';
+import Dashboard from './pages/admin/Dashboard';
 import { verifySessionToken, logout } from './services/api';
 import Register from './pages/Register';
 
 const App = () => {
   const [profileDrawerVisible, setProfileDrawerVisible] = useState(false);
   const [basketDrawerVisible, setBasketDrawerVisible] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // State to track login status
-  const [user, setUser] = useState(null); // State to store user information
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
   const location = useLocation();
@@ -33,12 +36,12 @@ const App = () => {
     fetchUser();
   }, []);
 
-  const toggleProfileDrawer = () => {
-    setProfileDrawerVisible(!profileDrawerVisible);
-  };
-
-  const toggleBasketDrawer = (visible) => {
-    setBasketDrawerVisible(visible !== undefined ? visible : !basketDrawerVisible);
+  const setDrawerVisibility = (drawerType, visible) => {
+    if (drawerType === 'profile') {
+      setProfileDrawerVisible(visible);
+    } else if (drawerType === 'basket') {
+      setBasketDrawerVisible(visible);
+    }
   };
 
   const handleLoginRedirect = () => {
@@ -66,15 +69,15 @@ const App = () => {
     <div className="App">
       <main>
         <div>
-          <nav className="navbar navbar-expand-lg navbar-dark" style={{ backgroundColor: '#28a745' }}>
-            <a className="navbar-brand" href="#" onClick={handleLogoClick}>Logo</a>
-            <div className="collapse navbar-collapse justify-content-end">
-              <ul className="navbar-nav">
+          <nav className="navbar bg-green-600 p-4">
+            <a className="navbar-brand text-white text-xl font-bold" href="#" onClick={handleLogoClick}>Logo</a>
+            <div className="flex justify-end items-center space-x-4">
+              <ul className="navbar-nav flex items-center space-x-4">
                 <li className="nav-item">
-                  <a className="nav-link" href="#" onClick={() => toggleBasketDrawer()}><i className="bi bi-basket basket-icon"></i></a>
+                  <a className="nav-link text-white" href="#" onClick={() => setDrawerVisibility('basket', true)}><i className="bi bi-basket basket-icon"></i></a>
                 </li>
-                <li className="nav-item d-flex align-items-center">
-                  <div className="profile-pic" onClick={toggleProfileDrawer}></div>
+                <li className="nav-item">
+                  <div className="profile-pic" onClick={() => setDrawerVisibility('profile', true)}></div>
                 </li>
               </ul>
             </div>
@@ -84,25 +87,28 @@ const App = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home user={user} isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />
           <Route path="/account" element={<AccountSettings isLoggedIn={isLoggedIn} user={user} />} />
-          <Route path="/basket" element={<Basket user={user} />} /> {/* Add Basket route */}
-          <Route path="/admin" element={<Dashboard user={user} />} /> {/* Add Dashboard route */}
-          <Route path="/register" element={<Register />} /> {/* Add Register route */}
+          <Route path="/basket" element={<Basket user={user} />} />
+          <Route path="/admin" element={<Dashboard user={user} />} />
+          <Route path="/admin/users" element={<UserManager user={user} />} />
+          <Route path="/admin/items" element={<ItemManager user={user} />} />
+          <Route path="/admin/orders" element={<OrderManager user={user} />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
 
       <ProfileDrawer
         visible={profileDrawerVisible}
-        toggleDrawer={toggleProfileDrawer}
+        toggleDrawer={() => setDrawerVisibility('profile', false)}
         isLoggedIn={isLoggedIn}
         handleLogout={handleLogout}
         handleLoginRedirect={handleLoginRedirect}
         handleSettingsRedirect={handleSettingsRedirect}
-        user={user} // Pass the user prop
+        user={user}
       />
 
       <BasketPreviewDrawer
         visible={basketDrawerVisible}
-        toggleDrawer={toggleBasketDrawer}
+        toggleDrawer={() => setDrawerVisibility('basket', false)}
         isLoggedIn={isLoggedIn}
         user={user}
       />

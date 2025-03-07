@@ -5,7 +5,7 @@ import BasketPreviewDrawer from '../components/BasketPreviewDrawer';
 import { fetchItems } from '../services/api';
 
 const Home = ({ user, isLoggedIn, onLogout }) => {
-  const [items, setItems] = useState([]); // State to store items
+  const [items, setItems] = useState([]);
   const [previewDrawerVisible, setPreviewDrawerVisible] = useState(null);
   const [basket, setBasket] = useState([]);
   const [basketDrawerVisible, setBasketDrawerVisible] = useState(false);
@@ -65,23 +65,20 @@ const Home = ({ user, isLoggedIn, onLogout }) => {
   };
 
   return (
-    <div>
-      <div className="container mt-4">
-        <div className="row">
-          {items.map(item => (
-            <ItemCard 
-              key={item.id} 
-              item={item} 
-              showPreviewDrawer={showPreviewDrawer} 
-              updateBasket={updateBasket} 
-              user={user} 
-              toggleBasketDrawer={toggleBasketDrawer}
-            />
-          ))}
-        </div>
+    <div className="container mt-4">
+      <div className="row">
+        {items.map(item => (
+          <ItemCard 
+            key={item.id} 
+            item={item} 
+            showPreviewDrawer={showPreviewDrawer} 
+            updateBasket={updateBasket} 
+            user={user} 
+            toggleBasketDrawer={toggleBasketDrawer}
+          />
+        ))}
       </div>
 
-      {/* Preview Drawers */}
       {items.map(item => (
         previewDrawerVisible === item.id && (
           <div ref={drawerRef} key={item.id}>

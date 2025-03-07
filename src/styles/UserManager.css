@@ -1,0 +1,31 @@
+.user-manager-container {
+    display: flex;
+  }
+  
+  .dashboard-menu {
+    flex: 0 0 250px; /* Adjust the width as needed */
+  }
+  
+  .user-manager-content {
+    flex: 1;
+    padding: 20px;
+  }
+  
+  .user-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+  
+  .user-table th, .user-table td {
+    border: 1px solid #ddd;
+    padding: 8px;
+  }
+  
+  .user-table th {
+    background-color: #f2f2f2;
+    text-align: left;
+  }
+  
+  .btn {
+    margin-right: 5px;
+  }

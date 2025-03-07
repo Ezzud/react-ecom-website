@@ -1,253 +1,211 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 /* General styles */
 body {
-  font-family: Arial, sans-serif;
+  @apply font-sans;
 }
 
 /* Navbar styles */
+.navbar {
+  @apply bg-green-600 p-4;
+}
+
+.navbar-brand {
+  @apply text-white text-xl font-bold;
+}
+
 .navbar-nav .nav-item .nav-link {
-  color: white;
-  text-transform: uppercase;
-  position: relative;
+  @apply text-white uppercase relative;
 }
 
 .navbar-nav .nav-item .nav-link::after {
   content: '';
-  display: block;
-  width: 0;
-  height: 2px;
-  background: white;
-  transition: width 0.3s;
-  position: absolute;
-  bottom: -5px;
-  left: 50%;
-  transform: translateX(-50%);
+  @apply block w-0 h-0.5 bg-white transition-all duration-300 absolute bottom-[-5px] left-1/2 transform -translate-x-1/2;
 }
 
 .navbar-nav .nav-item .nav-link:hover::after {
-  width: 100%;
+  @apply w-full;
+}
+
+.navbar-nav .nav-item .nav-link:hover {
+  @apply text-gray-300;
 }
 
 /* Profile picture styles */
 .profile-pic {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: gray;
-  cursor: pointer;
+  @apply w-8 h-8 rounded-full bg-gray-500 cursor-pointer;
 }
 
 /* Sold item styles */
 .sold-item {
-  border: 1px solid #ddd;
-  padding: 15px;
-  margin: 10px 0;
-  text-align: center;
-  position: relative;
-  transition: box-shadow 0.3s;
+  @apply border border-gray-300 p-4 my-2 text-center relative transition-shadow duration-300;
 }
 
 .sold-item:hover {
-  box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+  @apply shadow-md;
 }
 
 .sold-item img {
-  width: 100px;
-  height: 100px;
-  border-radius: 50%;
-  transition: transform 0.3s;
+  @apply w-24 h-24 rounded-full transition-transform duration-300;
 }
 
 .sold-item img:hover {
-  transform: scale(1.1);
+  @apply transform scale-110;
 }
 
 /* Basket item styles */
 .basket-item-avatar {
-  width: 90%;
-  border-radius: 5%;
+  @apply w-11/12 rounded-md;
 }
 
 /* Offcanvas styles */
 .offcanvas {
-  display: none;
-  position: fixed;
-  top: 68px; /* Adjust based on navbar height */
-  right: 0;
-  width: 300px;
-  background-color: lightgray;
-  z-index: 1045;
-  box-shadow: none; /* Remove shadow */
+  @apply hidden fixed top-[68px] right-0 w-72 bg-gray-200 z-[1045] shadow-none;
 }
 
 .offcanvas.show {
-  display: block;
+  @apply block;
 }
 
 .offcanvas-body {
-  padding: 15px;
-  height: auto; /* Set height to auto to fit content */
+  @apply p-4 h-auto;
 }
 
 .offcanvas-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 15px;
-  border-bottom: 1px solid #ddd;
+  @apply flex justify-between items-center p-4 border-b border-gray-300;
 }
 
 /* Profile drawer styles */
 .profile-drawer .offcanvas-header {
-  background-color: #f8f9fa;
+  @apply bg-gray-100;
 }
 
 .profile-drawer .offcanvas-title {
-  font-size: 1.25rem;
-  font-weight: bold;
+  @apply text-xl font-bold;
 }
 
 .profile-drawer .close {
-  font-size: 1.5rem;
-  cursor: pointer;
-  border: none; /* Remove border */
-  background: none; /* Remove background */
+  @apply text-2xl cursor-pointer border-none bg-none;
 }
 
 .profile-drawer .offcanvas-body .btn {
-  width: 100%;
-  margin-bottom: 10px; /* Ensure buttons are not on the same height */
+  @apply w-full mb-2;
 }
 
 /* Basket drawer styles */
 .basket-drawer {
-  max-height: 80%; /* Limit the maximum height */
-  overflow-y: auto; /* Add scroll if content overflows */
+  @apply max-h-[80%] overflow-y-auto;
 }
 
 .basket-drawer .offcanvas-body {
-  padding: 15px;
-  height: auto; /* Set height to auto to fit content */
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
+  @apply p-4 h-auto flex flex-col justify-between;
 }
 
 .basket-drawer .basket-items {
-  flex-grow: 1;
-  overflow-y: auto;
+  @apply flex-grow overflow-y-auto;
 }
 
 .basket-drawer .basket-footer {
-  margin-top: 10px;
+  @apply mt-2;
 }
 
 /* Preview drawer styles */
 .preview-drawer {
-  display: none;
-  position: fixed;
-  top: 10%;
-  left: 5%;
-  width: 90%;
-  height: 80%;
-  background-color: white;
-  box-shadow: 0 0 10px rgba(0,0,0,0.5);
-  z-index: 1050;
-  overflow: hidden;
+  @apply hidden fixed top-[10%] left-[5%] w-[90%] h-[80%] bg-white shadow-lg z-[1050] overflow-hidden;
 }
 
 .preview-drawer.show {
-  display: block;
+  @apply block;
 }
 
 .preview-drawer .close {
-  position: absolute;
-  top: 10px;
-  right: 10px;
-  font-size: 24px;
-  cursor: pointer;
+  @apply absolute top-2.5 right-2.5 text-2xl cursor-pointer;
 }
 
 .preview-drawer .drawer-content {
-  display: flex;
-  height: 100%;
+  @apply flex h-full;
 }
 
 .preview-drawer .drawer-content .image {
-  width: 40%;
-  background-size: cover;
-  background-position: center;
+  @apply w-2/5 bg-cover bg-center;
 }
 
 .preview-drawer .drawer-content .details {
-  width: 60%;
-  padding: 20px;
-  overflow-y: auto;
+  @apply w-3/5 p-5 overflow-y-auto;
 }
 
 /* Additional CSS for buttons */
 .offcanvas-body .btn {
-  width: 100%;
-  margin-bottom: 10px; /* Ensure buttons are not on the same height */
+  @apply w-full mb-2;
 }
 
 .preview-drawer .btn {
-  width: 100%;
+  @apply w-full;
 }
 
 /* Responsive CSS for profile picture and basket icon */
 .profile-pic {
-  width: 30px;
-  height: 30px;
-  border-radius: 50%;
-  background-color: gray;
-  cursor: pointer;
+  @apply w-8 h-8 rounded-full bg-gray-500 cursor-pointer;
 }
 
 .basket-icon {
-  font-size: 1.5rem;
+  @apply text-2xl text-white;
 }
 
 @media (max-width: 768px) {
   .profile-pic {
-    width: 25px;
-    height: 25px;
+    @apply w-6 h-6;
   }
 
   .basket-icon {
-    font-size: 1.25rem;
+    @apply text-xl;
   }
 }
 
 @media (max-width: 576px) {
   .profile-pic {
-    width: 20px;
-    height: 20px;
+    @apply w-5 h-5;
   }
 
   .basket-icon {
-    font-size: 1rem;
+    @apply text-lg;
   }
 }
 
 /* Custom CSS for responsive navbar */
 .navbar-nav {
-  flex-direction: row;
+  @apply flex-row;
 }
 
 .nav-item {
-  margin-left: 10px;
-  margin-right: 10px;
+  @apply mx-2;
 }
 
 @media (max-width: 576px) {
   .navbar-nav {
-    flex-direction: column;
-    align-items: center;
+    @apply flex-col items-center;
   }
 
   .nav-item {
-    margin-left: 0;
-    margin-right: 0;
-    margin-bottom: 10px;
+    @apply mx-0 mb-2;
   }
+}
+
+/* Ensure navbar buttons are visible and clickable */
+.navbar .nav-link {
+  @apply text-white;
+}
+
+.navbar .nav-link:hover {
+  @apply text-gray-300;
+}
+
+.navbar .nav-item {
+  @apply flex items-center;
+}
+
+.navbar .nav-item .nav-link {
+  @apply flex items-center;
 }
