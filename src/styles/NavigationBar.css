@@ -1,0 +1,129 @@
+.navbar {
+    background-color: #047857;
+    padding: 1rem;
+  }
+  
+  .navbar-brand {
+    color: white;
+    font-size: 1.25rem;
+    font-weight: bold;
+  }
+  
+  .navbar-nav {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .nav-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .nav-link {
+    display: flex;
+    align-items: center;
+    color: white;
+  }
+  
+  .navbar-nav .nav-item .nav-link {
+    color: white;
+    text-transform: uppercase;
+    position: relative;
+  }
+  
+  .navbar-nav .nav-item .nav-link::after {
+    content: '';
+    display: block;
+    width: 0;
+    height: 0.125rem;
+    background-color: white;
+    transition: all 0.3s;
+    position: absolute;
+    bottom: -0.3125rem;
+    left: 50%;
+    transform: translateX(-50%);
+  }
+  
+  .navbar-nav .nav-item .nav-link:hover::after {
+    width: 100%;
+  }
+  
+  .navbar-nav .nav-item .nav-link:hover {
+    color: #d1d5db;
+  }
+  
+  .profile-pic {
+    width: 2rem;
+    height: 2rem;
+    border-radius: 9999px;
+    background-color: #6b7280;
+    cursor: pointer;
+    flex-shrink: 0;
+  }
+  
+  .basket-icon {
+    font-size: 1.5rem;
+    color: white;
+  }
+  
+  @media (max-width: 768px) {
+    .profile-pic {
+      width: 1.5rem;
+      height: 1.5rem;
+    }
+  
+    .basket-icon {
+      font-size: 1.25rem;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .profile-pic {
+      width: 1.25rem;
+      height: 1.25rem;
+    }
+  
+    .basket-icon {
+      font-size: 1rem;
+    }
+  }
+  
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  
+  .nav-item {
+    margin: 0 0.5rem;
+  }
+  
+  @media (max-width: 576px) {
+    .navbar-nav {
+      flex-direction: column;
+      align-items: center;
+    }
+  
+    .nav-item {
+      margin: 0 0 0.5rem 0;
+    }
+  }
+  
+  .navbar .nav-link {
+    color: white;
+  }
+  
+  .navbar .nav-link:hover {
+    color: #d1d5db;
+  }
+  
+  .navbar .nav-item {
+    display: flex;
+    align-items: center;
+  }
+  
+  .navbar .nav-item .nav-link {
+    display: flex;
+    align-items: center;
+  }

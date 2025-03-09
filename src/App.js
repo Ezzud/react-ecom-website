@@ -16,6 +16,7 @@ import Basket from './pages/Basket';
 import Dashboard from './pages/admin/Dashboard';
 import { verifySessionToken, logout } from './services/api';
 import Register from './pages/Register';
+import NavigationBar from './components/NavigationBar'; // Import the new NavigationBar component
 
 const App = () => {
   const [profileDrawerVisible, setProfileDrawerVisible] = useState(false);
@@ -60,31 +61,10 @@ const App = () => {
     navigate('/account');
   };
 
-  const handleLogoClick = (e) => {
-    e.preventDefault();
-    if (location.pathname !== '/') {
-      navigate('/');
-    }
-  };
-
   return (
     <div className="App">
       <main>
-        <div>
-          <nav className="navbar bg-green-600 p-4">
-            <a className="navbar-brand text-white text-xl font-bold" href="#" onClick={handleLogoClick}>Logo</a>
-            <div className="flex justify-end items-center space-x-4">
-              <ul className="navbar-nav flex items-center space-x-4">
-                <li className="nav-item">
-                  <a className="nav-link text-white" href="#" onClick={() => setDrawerVisibility('basket', true)}><i className="bi bi-basket basket-icon"></i></a>
-                </li>
-                <li className="nav-item">
-                  <div className="profile-pic" onClick={() => setDrawerVisibility('profile', true)}></div>
-                </li>
-              </ul>
-            </div>
-          </nav>
-        </div>
+        <NavigationBar setDrawerVisibility={setDrawerVisibility} /> {/* Use the NavigationBar component */}
         <Routes>
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Home user={user} isLoggedIn={isLoggedIn} onLogout={handleLogout} />} />

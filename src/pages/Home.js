@@ -4,6 +4,8 @@ import ItemDetails from '../components/ItemDetails';
 import BasketPreviewDrawer from '../components/BasketPreviewDrawer';
 import { fetchItems } from '../services/api';
 import { cuteToast } from 'cute-alert';
+import '../styles/Home.css';
+
 
 const Home = ({ user, isLoggedIn, onLogout }) => {
   const [items, setItems] = useState([]);

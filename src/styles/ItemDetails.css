@@ -1,4 +1,27 @@
 .description {
-    color: gray;
-    margin-bottom: 10px;
+  color: gray;
+  margin-bottom: 10px;
+}
+
+.close {
+  font-size: 28px; /* Increase the size */
+  cursor: pointer;
+  transition: all 0.3s ease;
+  position: absolute;
+  top: 20px; /* Adjust the spacing as needed */
+  right: 20px; /* Adjust the spacing as needed */
+}
+
+.close:hover {
+  color: red;
+}
+
+@media (max-width: 768px) {
+  .close {
+    font-size: 32px; /* Increase the size more on mobile */
   }
+  
+  .close:hover {
+    color: inherit; /* Keep the original color on mobile */
+  }
+}

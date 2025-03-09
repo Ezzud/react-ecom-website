@@ -36,7 +36,7 @@ const ItemDetails = ({ item, hidePreviewDrawer, isLoggedIn, handleLoginRedirect,
         <div className="image" style={{ backgroundImage: `url(${item.avatarURL.replace('100', '400')})` }}></div>
         <div className="details">
           <h5>{item.name}</h5>
-          <p><strong>${item.price}</strong></p>
+          <p><strong>{item.price.toFixed(2)}€</strong></p>
           <p className="description">{item.description}</p> {/* Apply the description class */}
           <button 
             className="btn btn-primary btn-block" 

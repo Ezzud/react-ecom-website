@@ -1,0 +1,101 @@
+.item-card {
+    position: relative;
+    width: 30%; /* Adjust this value to fit 3 items per line */
+    padding-bottom: 30%; /* Makes the card a square */
+    margin-bottom: 1rem;
+    margin-right: 1.5%;
+    overflow: hidden;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    transition: transform 0.3s;
+    display: inline-block;
+    vertical-align: top;
+  }
+  
+  .item-card:nth-child(3n) {
+    margin-right: 0;
+  }
+  
+  .item-card:hover {
+    transform: scale(1.05);
+  }
+  
+  .item-image {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 90%;
+    background-size: cover;
+    background-position: center;
+    cursor: pointer;
+  }
+  
+  .item-price {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-weight: bold;
+    user-select: none; /* Make the price div unselectable */
+  }
+  
+  .add-to-basket {
+    position: absolute;
+    bottom: 8px;
+    right: 8px;
+    background-color: white;
+    border: none;
+    border-radius: 50%;
+    padding: 8px 12px; /* Increased padding to make the button wider */
+    display: none;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease;
+  }
+  
+  .item-card:hover .add-to-basket {
+    display: block;
+  }
+  
+  .add-to-basket:hover {
+    background-color: #047857; /* Dark green background */
+    color: white; /* White icon */
+  }
+  
+  .add-to-basket:hover i {
+    color: white; /* White icon */
+  }
+  
+  .item-name {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    padding: 8px;
+    background-color: white;
+    text-align: center;
+    font-weight: bold;
+    border-top: 1px solid #ddd;
+    cursor: pointer;
+  }
+  
+  .error {
+    color: red;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-top: 8px;
+  }
+  
+  @media (max-width: 768px) {
+    .item-card {
+      width: 100%; /* Makes the card take full width on mobile */
+      padding-bottom: 100%; /* Keeps the card square */
+      margin-right: 0;
+    }
+  
+    .add-to-basket {
+      display: block; /* Always show the add-to-basket button on mobile */
+    }
+  }

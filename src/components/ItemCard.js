@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addItemToBasket } from '../services/api';
+import '../styles/ItemCard.css';
 
 const ItemCard = ({ item, showPreviewDrawer, updateBasket, user, toggleBasketDrawer }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -24,23 +25,24 @@ const ItemCard = ({ item, showPreviewDrawer, updateBasket, user, toggleBasketDra
     }
   };
 
+  const handleShowDetails = () => {
+    showPreviewDrawer(item.id);
+  };
+
   return (
-    <div className="col-12 col-md-6 col-lg-4" key={item.id}>
-      <div className="sold-item" onClick={() => showPreviewDrawer(item.id)}>
-        <img src={item.avatarURL} alt="Profile Picture" />
-        <h2>{item.name}</h2>
-        <p>{item.description}</p>
-        <p>Price: ${item.price}</p>
+    <div className="item-card">
+      <div className="item-image" style={{ backgroundImage: `url(${item.avatarURL})` }} onClick={handleShowDetails}>
+        <div className="item-price" unselectable="on">{item.price.toFixed(2)}€</div>
         <button 
-          className="add-to-cart-btn" 
+          className="add-to-basket" 
           onClick={handleAddToCart} 
           disabled={isLoading}
-          style={{ position: 'absolute', bottom: '10px', right: '10px', backgroundColor: 'green', color: 'white', borderRadius: '15%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}
         >
-          {isLoading ? '...' : '+'}
+          <i className="bi bi-cart-plus"></i>
         </button>
-        {error && <p className="error">{error}</p>}
       </div>
+      <div className="item-name" onClick={handleShowDetails}>{item.name}</div>
+      {error && <p className="error">{error}</p>}
     </div>
   );
 };
