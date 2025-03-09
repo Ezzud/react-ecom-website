@@ -10,6 +10,7 @@ import BasketPreviewDrawer from './components/BasketPreviewDrawer';
 import UserManager from './pages/admin/UserManager';
 import ItemManager from './pages/admin/ItemManager';
 import OrderManager from './pages/admin/OrderManager';
+import PrescriptionManager from './pages/admin/PrescriptionManager';
 import Basket from './pages/Basket';
 import Dashboard from './pages/admin/Dashboard';
 import { verifySessionToken, logout } from './services/api';
@@ -92,6 +93,7 @@ const App = () => {
           <Route path="/admin/users" element={<UserManager user={user} />} />
           <Route path="/admin/items" element={<ItemManager user={user} />} />
           <Route path="/admin/orders" element={<OrderManager user={user} />} />
+          <Route path="/admin/prescriptions" element={<PrescriptionManager user={user} />} />
           <Route path="/register" element={<Register />} />
         </Routes>
       </main>

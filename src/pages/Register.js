@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { registerUser } from '../services/api'; // Assuming you have a registerUser function in your API service
+import { authenticateUser, registerUser } from '../services/api'; // Assuming you have a registerUser function in your API service
 import '../styles/Register.css'; // Assuming you have a CSS file for Register styles
 
 const Register = () => {
@@ -33,14 +33,24 @@ const Register = () => {
 
     try {
       const response = await registerUser({ firstName, lastName, email, password });
-      if (response.success) {
-        window.location.href = '/login';
+      if (response.id) {
+        const sessionToken = await authenticateUser(email, password);
+        if (sessionToken) {
+          document.cookie = `sessionToken=${sessionToken}; path=/`;
+          window.location.href = '/';
+        } else {
+          window.location.href = '/login';
+        }
       } else {
         setError(response.message);
       }
     } catch (error) {
       console.error('Registration error:', error);
-      setError('An error occurred during registration. Please try again later.');
+      if (error.error === "EmailAlreadyExists") {
+        setError('An account with this email already exists.');
+      } else {
+        setError('An error occurred during registration. Please try again later.');
+      }
     } finally {
       setLoading(false);
     }

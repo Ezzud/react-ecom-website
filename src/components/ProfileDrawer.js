@@ -55,7 +55,7 @@ const ProfileDrawer = ({ visible, toggleDrawer, isLoggedIn, handleLogout, handle
       </div>
       <div className="offcanvas-body">
         <button className="btn btn-primary btn-block" onClick={handleSettingsRedirect}>Settings</button>
-        {user && user.isAdmin && (
+        {user && user.isAdmin === "true" && (
           <button className="btn btn-secondary btn-block mt-2" onClick={handleAdminPanelRedirect}>Admin Panel</button>
         )}
         {isLoggedIn ? (

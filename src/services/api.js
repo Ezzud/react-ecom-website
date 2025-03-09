@@ -1,6 +1,78 @@
 import User from '../models/User';
 const ROOT_URL = 'http://localhost:3333';
 
+
+/**
+ * Fetch all prescriptions
+ * 
+ * @returns {Promise<Array>} prescriptions
+ */
+export const fetchPrescriptions = async () => {
+  try {
+    const response = await fetch(`${ROOT_URL}/prescriptions/all`, {
+      method: 'GET',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to fetch prescriptions');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error fetching prescriptions:', error);
+    return [];
+  }
+};
+
+/**
+ * Delete a prescription by ID
+ * 
+ * @param {string} prescriptionId
+ * @returns {Promise<void>}
+ */
+export const deletePrescription = async (prescriptionId) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/prescriptions/${prescriptionId}`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to delete prescription');
+    }
+  } catch (error) {
+    console.error('Error deleting prescription:', error);
+  }
+};
+
+/**
+ * Update a prescription
+ * 
+ * @param {Object} prescription
+ * @returns {Promise<void>}
+ */
+export const updatePrescription = async (prescription) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/prescriptions/${prescription.id}`, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify(prescription),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to update prescription');
+    }
+  } catch (error) {
+    console.error('Error updating prescription:', error);
+  }
+};
 /**
  * Fetch all orders
  * 
