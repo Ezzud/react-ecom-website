@@ -3,6 +3,7 @@ import ItemCard from '../components/ItemCard';
 import ItemDetails from '../components/ItemDetails';
 import BasketPreviewDrawer from '../components/BasketPreviewDrawer';
 import { fetchItems } from '../services/api';
+import { cuteToast } from 'cute-alert';
 
 const Home = ({ user, isLoggedIn, onLogout }) => {
   const [items, setItems] = useState([]);
@@ -48,16 +49,31 @@ const Home = ({ user, isLoggedIn, onLogout }) => {
   };
 
   const updateBasket = (newItem) => {
-    setBasket(prevBasket => {
-      const existingItem = prevBasket.find(item => item.id === newItem.id);
-      if (existingItem) {
-        return prevBasket.map(item =>
-          item.id === newItem.id ? { ...item, quantity: item.quantity + 1 } : item
-        );
-      } else {
-        return [...prevBasket, { ...newItem, quantity: 1 }];
-      }
-    });
+    try {
+      setBasket(prevBasket => {
+        const existingItem = prevBasket.find(item => item.id === newItem.id);
+        if (existingItem) {
+          return prevBasket.map(item =>
+            item.id === newItem.id ? { ...item, quantity: item.quantity + 1 } : item
+          );
+        } else {
+          return [...prevBasket, { ...newItem, quantity: 1 }];
+        }
+      });
+      cuteToast({
+        type: "success",
+        title: "Success",
+        description: `${newItem.name} has been added to the basket.`,
+        timer: 3000
+      });
+    } catch (error) {
+      cuteToast({
+        type: "error",
+        title: "Error",
+        description: "An error occurred while adding the item to the basket.",
+        timer: 3000
+      });
+    }
   };
 
   const toggleBasketDrawer = (visible) => {

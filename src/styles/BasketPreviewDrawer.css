@@ -1,0 +1,32 @@
+.basket-drawer {
+  position: fixed;
+  top: 4rem; /* Adjust this value based on the height of your navigation menu */
+  right: 0;
+  width: 300px;
+  height: calc(100% - 4rem); /* Adjust this value based on the height of your navigation menu */
+  background-color: white;
+  z-index: 1050; /* Ensure it is in front of other items except for cute-alert toasts */
+  overflow-y: auto;
+}
+
+.basket-drawer .offcanvas-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  border-bottom: 1px solid #dee2e6;
+}
+
+.basket-drawer .offcanvas-body {
+  padding: 1rem;
+}
+
+.basket-drawer .basket-items ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.basket-drawer .basket-footer {
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+}

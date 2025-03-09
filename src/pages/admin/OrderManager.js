@@ -44,6 +44,18 @@ const OrderManager = ({ user }) => {
     setEditedOrder({ ...editedOrder, [name]: value });
   };
 
+  const calculateItemQuantities = (items) => {
+    const itemQuantities = items.reduce((acc, item) => {
+      if (acc[item.id]) {
+        acc[item.id].quantity += 1;
+      } else {
+        acc[item.id] = { ...item, quantity: 1 };
+      }
+      return acc;
+    }, {});
+    return Object.values(itemQuantities);
+  };
+
   return (
     <div className="user-manager-container">
       <DashboardMenu />
@@ -62,7 +74,7 @@ const OrderManager = ({ user }) => {
             {orders.map((order) => (
               <tr key={order.id}>
                 <td>{order.id}</td>
-                <td>{order.user}</td>
+                <td>{order.user.firstName} {order.user.lastName}</td>
                 <td>
                   <select
                     name="status"
@@ -78,8 +90,10 @@ const OrderManager = ({ user }) => {
                 </td>
                 <td>
                   <ul>
-                    {order.items.map((item, index) => (
-                      <li key={index}>{item.name}</li>
+                    {calculateItemQuantities(order.items).map((item, index) => (
+                      <li key={index}>
+                        {item.name} <strong>x{item.quantity}</strong>
+                      </li>
                     ))}
                   </ul>
                 </td>

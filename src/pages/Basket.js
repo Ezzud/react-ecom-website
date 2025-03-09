@@ -1,13 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { getUserBasketItems, addItemToBasket, removeItemFromBasket } from '../services/api';
+import { getUserBasketItems, addItemToBasket, removeItemFromBasket, clearBasket } from '../services/api';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../styles/Basket.css'; // Import custom CSS for Basket
 import BasketItem from '../components/BasketItem'; // Import the BasketItem component
+import { useNavigate } from 'react-router-dom';
 
 const Basket = ({ user }) => {
   const [basketItems, setBasketItems] = useState([]);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(null);
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchBasketItems = async () => {
@@ -49,6 +51,23 @@ const Basket = ({ user }) => {
     }
   };
 
+  const handleClearBasket = async () => {
+    setLoading(true);
+    setError(null);
+    try {
+      await clearBasket(user.id);
+      setBasketItems([]);
+    } catch (error) {
+      setError('An error occurred while clearing the basket');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCompleteOrder = () => {
+    navigate('/order-confirmation');
+  };
+
   const totalPrice = basketItems.reduce((total, item) => total + Number(item.price) * item.quantity, 0);
 
   return (
@@ -83,6 +102,12 @@ const Basket = ({ user }) => {
               ))}
             </ul>
             <h5>Total Price: ${totalPrice.toFixed(2)}</h5>
+            <button className="btn btn-danger btn-block mt-3" onClick={handleClearBasket} disabled={loading}>
+              {loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Clear Basket'}
+            </button>
+            <button className="btn btn-success btn-block mt-3" onClick={handleCompleteOrder} disabled={loading || basketItems.length === 0}>
+              Complete Order
+            </button>
           </div>
         </div>
       </div>

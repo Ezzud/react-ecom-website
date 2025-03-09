@@ -3,6 +3,56 @@ const ROOT_URL = 'http://localhost:3333';
 
 
 /**
+ * Create a new order
+ * 
+ * @param {Object} orderData
+ * @returns {Promise<Object>}
+ */
+export const createOrder = async (orderData) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/orders/new`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${getCookie('sessionToken')}`,
+      },
+      body: JSON.stringify(orderData),
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to create order');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error creating order:', error);
+    return { success: false, error: error.message };
+  }
+};
+/**
+ * Clear the user's basket
+ * 
+ * @param {string} userId
+ * @returns {Promise<void>}
+ */
+export const clearBasket = async (userId) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/basket/${userId}/clear`, {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': `${getCookie('sessionToken')}`,
+      },
+    });
+
+    if (!response.ok) {
+      throw new Error('Failed to clear basket');
+    }
+  } catch (error) {
+    console.error('Error clearing basket:', error);
+  }
+};
+/**
  * Fetch all prescriptions
  * 
  * @returns {Promise<Array>} prescriptions
@@ -80,7 +130,7 @@ export const updatePrescription = async (prescription) => {
  */
 export const fetchOrders = async () => {
     try {
-      const response = await fetch(`${ROOT_URL}/orders/all`, {
+      const response = await fetch(`${ROOT_URL}/orders/`, {
         method: 'GET',
         headers: {
           'Content-Type': 'application/json',
@@ -416,52 +466,55 @@ const getCookie = (name) => {
  * @returns {Promise<Array|null>} basketItems
  */
 export const getUserBasketItems = async (userId, limit = 0) => {
-    try {
-        const response = await fetch(`${ROOT_URL}/basket/${userId}/`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `${getCookie('sessionToken')}`,
-            },
-        });
+  try {
+      const response = await fetch(`${ROOT_URL}/basket/${userId}/`, {
+          method: 'GET',
+          headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `${getCookie('sessionToken')}`,
+          },
+      });
 
-        if (!response.ok) {
-            throw new Error('Failed to fetch basket items');
-        }
+      if (!response.ok) {
+          throw new Error('Failed to fetch basket items');
+      }
 
-        const data = await response.json();
+      const data = await response.json();
 
-        if (data.error) {
-            if (data.error === 'BasketNotFound') {
-                console.error('Basket not found');
-                return [];
-            } else if (data.error === 'UserNotFound') {
-                window.location.href = '/login';
-                return [];
-            } else {
-                throw new Error(data.error);
-            }
-        }
+      if (data.error) {
+          if (data.error === 'BasketNotFound') {
+              console.error('Basket not found');
+              return [];
+          } else if (data.error === 'UserNotFound') {
+              window.location.href = '/login';
+              return [];
+          } else {
+              throw new Error(data.error);
+          }
+      }
 
-        const items = Array.isArray(data.items) ? data.items.reduce((acc, item) => {
-            const existingItem = acc.find(i => i.id === item.id);
-            if (existingItem) {
-                existingItem.quantity += 1;
-            } else {
-                acc.push({ ...item, quantity: 1 });
-            }
-            return acc;
-        }, []) : [];
+      const items = Array.isArray(data.items) ? data.items.reduce((acc, item) => {
+          const existingItem = acc.find(i => i.id === item.id);
+          if (existingItem) {
+              existingItem.quantity += 1;
+          } else {
+              acc.push({ ...item, quantity: 1 });
+          }
+          return acc;
+      }, []) : [];
 
-        if (limit > 0) {
-            return items.slice(0, limit);
-        }
+      // Sort items by id
+      items.sort((a, b) => a.id - b.id);
 
-        return items;
-    } catch (error) {
-        console.error('Error fetching basket items:', error);
-        return null;
-    }
+      if (limit > 0) {
+          return items.slice(0, limit);
+      }
+
+      return items;
+  } catch (error) {
+      console.error('Error fetching basket items:', error);
+      return null;
+  }
 };
 
 /**

@@ -8,7 +8,7 @@ const BasketItem = ({ item, index, handleQuantityChange, loading }) => {
           <img 
             src={item.avatarURL} 
             alt="Item Avatar" 
-            className="basket-item-avatar" 
+            className="basket-item-avatar basket-item-image" 
           />
           <h5 className="card-title">{item.name}</h5>
           <p className="card-text">{item.description}</p>

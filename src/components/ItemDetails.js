@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { addItemToBasket } from '../services/api';
+import '../styles/ItemDetails.css'; // Import the CSS file for styling
 
 const ItemDetails = ({ item, hidePreviewDrawer, isLoggedIn, handleLoginRedirect, updateBasket, user, toggleBasketDrawer }) => {
   const [isLoading, setIsLoading] = useState(false);
@@ -35,8 +36,8 @@ const ItemDetails = ({ item, hidePreviewDrawer, isLoggedIn, handleLoginRedirect,
         <div className="image" style={{ backgroundImage: `url(${item.avatarURL.replace('100', '400')})` }}></div>
         <div className="details">
           <h5>{item.name}</h5>
-          <p>{item.fullDescription}</p>
           <p><strong>${item.price}</strong></p>
+          <p className="description">{item.description}</p> {/* Apply the description class */}
           <button 
             className="btn btn-primary btn-block" 
             onClick={handleAddToCart}

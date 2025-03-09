@@ -1,30 +1,12 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { getUserBasketItems } from '../services/api';
+import '../styles/BasketPreviewDrawer.css';
 
 const BasketPreviewDrawer = ({ visible, toggleDrawer, isLoggedIn, user }) => {
   const navigate = useNavigate();
   const location = useLocation();
-  const drawerRef = useRef(null);
   const [basketItems, setBasketItems] = useState([]);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      if (drawerRef.current && !drawerRef.current.contains(event.target)) {
-        toggleDrawer();
-      }
-    };
-
-    if (visible) {
-      document.addEventListener('mousedown', handleClickOutside);
-    } else {
-      document.removeEventListener('mousedown', handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener('mousedown', handleClickOutside);
-    };
-  }, [visible, toggleDrawer]);
 
   useEffect(() => {
     if (visible && isLoggedIn) {
@@ -45,7 +27,7 @@ const BasketPreviewDrawer = ({ visible, toggleDrawer, isLoggedIn, user }) => {
   };
 
   return (
-    <div ref={drawerRef} className="offcanvas show basket-drawer">
+    <div className="basket-drawer">
       <div className="offcanvas-header">
         <h5 className="offcanvas-title">Basket</h5>
         <button type="button" className="close" onClick={toggleDrawer} aria-label="Close">

@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import { authenticateUser, isAuthenticated } from '../services/api';
+import { cuteToast } from 'cute-alert';
 import '../styles/Login.css'; // Assuming you have a CSS file for Login styles
 
 const Login = () => {
-  const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -33,14 +33,31 @@ const Login = () => {
       const sessionToken = await authenticateUser(email, password);
       if (sessionToken) {
         document.cookie = `sessionToken=${sessionToken}; path=/`;
-        window.location.href = '/';
+        cuteToast({
+          type: "success",
+          title: "Success",
+          description: "You have successfully logged in.",
+          timer: 1000
+        }).then(() => {
+          window.location.href = '/';
+        });
       } else {
         console.error('Incorrect credentials');
-        setError('Incorrect credentials. Please try again.');
+        cuteToast({
+          type: "error",
+          title: "Error",
+          description: "Incorrect credentials. Please try again.",
+          timer: 3000
+        });
       }
     } catch (error) {
       console.error('Login error:', error);
-      setError('An error occurred during login. Please try again later.');
+      cuteToast({
+        type: "error",
+        title: "Error",
+        description: "An error occurred during login. Please try again later.",
+        timer: 3000
+      });
     } finally {
       setLoading(false);
     }
@@ -58,11 +75,10 @@ const Login = () => {
           <label htmlFor="password">Password:</label>
           <input type="password" id="password" name="password" className="form-control" required />
         </div>
-        {error && <p className="error-message">{error}</p>}
         <button type="submit" className="btn btn-primary btn-block" disabled={loading}>
           {loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Login'}
         </button>
-        </form>
+      </form>
       <p>Don't have an account? <a href="/register">Register</a></p>
     </div>
   );
