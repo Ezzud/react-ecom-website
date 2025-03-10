@@ -16,7 +16,8 @@ import Basket from './pages/Basket';
 import Dashboard from './pages/admin/Dashboard';
 import { verifySessionToken, logout } from './services/api';
 import Register from './pages/Register';
-import NavigationBar from './components/NavigationBar'; // Import the new NavigationBar component
+import Footer from './components/Footer'; 
+import NavigationBar from './components/NavigationBar';
 
 const App = () => {
   const [profileDrawerVisible, setProfileDrawerVisible] = useState(false);
@@ -95,6 +96,7 @@ const App = () => {
         isLoggedIn={isLoggedIn}
         user={user}
       />
+      <Footer /> {/* Add the Footer component */}
     </div>
   );
 };

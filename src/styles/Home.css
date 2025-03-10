@@ -73,6 +73,13 @@
   width: 100%;
 }
 
+.row > * {
+  width: 30% !important;
+  max-width: 30% !important;
+  margin-right: 1rem !important;
+  margin-left: 1rem !important;
+}
+
 @media (max-width: 768px) {
   .profile-pic {
     width: 1.5rem;
@@ -81,6 +88,13 @@
 
   .basket-icon {
     font-size: 1.25rem;
+  }
+
+  .row > * {
+    width: 90% !important;
+    max-width: 90% !important;
+    margin-right: 1rem !important;
+    margin-left: 1rem !important;
   }
 }
 

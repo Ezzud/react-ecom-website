@@ -1,10 +1,57 @@
 .quantity-text {
-    font-weight: bold;
-    color: black;
-  }
+  font-weight: bold;
+  color: black;
+}
 
-  .basket-item-image {
-    width: 100px;
-    height: 100px;
-    object-fit: cover;
-  }
+.basket-item-image {
+  width: 100px;
+  height: 100px;
+  object-fit: cover;
+}
+
+/* Add any additional styles for the new basket-row class if needed */
+.basket-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.basket-row > .col-md-8,
+.basket-row > .col-md-4 {
+  padding-right: 15px;
+  padding-left: 15px;
+}
+
+/* Button styles */
+.btn-clear-basket {
+  background-color: #dc3545; /* Set button background color */
+  color: white; /* Set button font color */
+  text-transform: uppercase; /* Uppercase letters */
+  border-radius: 4px; /* Small round corners */
+  border: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-clear-basket:hover {
+  background-color: white; /* Set hover background color */
+  color: #dc3545; /* Set hover font color */
+  border: 1px solid #dc3545; /* Add border on hover */
+}
+
+.btn-complete-order {
+  background-color: #28a745; /* Set button background color */
+  color: white; /* Set button font color */
+  text-transform: uppercase; /* Uppercase letters */
+  border-radius: 4px; /* Small round corners */
+  border: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-complete-order:hover {
+  background-color: white; /* Set hover background color */
+  color: #28a745; /* Set hover font color */
+  border: 1px solid #28a745; /* Add border on hover */
+}

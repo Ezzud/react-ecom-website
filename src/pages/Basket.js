@@ -72,7 +72,7 @@ const Basket = ({ user }) => {
 
   return (
     <div className="container mt-4">
-      <div className="row">
+      <div className="basket-row">
         <div className="col-md-8">
           <h2>Your Basket</h2>
           {error && <div className="alert alert-danger">{error}</div>}
@@ -102,11 +102,11 @@ const Basket = ({ user }) => {
               ))}
             </ul>
             <h5>Total Price: ${totalPrice.toFixed(2)}</h5>
-            <button className="btn btn-danger btn-block mt-3" onClick={handleClearBasket} disabled={loading}>
-              {loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : 'Clear Basket'}
+            <button className="btn btn-clear-basket btn-block mt-3" onClick={handleClearBasket} disabled={loading}>
+              {loading ? <span className="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> : <><i className="fas fa-trash-alt"></i> Clear Basket</>}
             </button>
-            <button className="btn btn-success btn-block mt-3" onClick={handleCompleteOrder} disabled={loading || basketItems.length === 0}>
-              Complete Order
+            <button className="btn btn-complete-order btn-block mt-3" onClick={handleCompleteOrder} disabled={loading || basketItems.length === 0}>
+              <i className="fas fa-check"></i> Complete Order
             </button>
           </div>
         </div>

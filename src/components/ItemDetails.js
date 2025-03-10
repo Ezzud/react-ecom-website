@@ -43,7 +43,8 @@ const ItemDetails = ({ item, hidePreviewDrawer, isLoggedIn, handleLoginRedirect,
             onClick={handleAddToCart}
             disabled={isLoading}
           >
-            {isLoading ? 'Loading...' : 'Add to Cart'}
+            <span>{isLoading ? 'Loading...' : 'Add to Cart'}</span>
+            <i className={`fas ${isLoading ? 'fa-spinner fa-spin' : 'fa-cart-plus'}`}></i>
           </button>
           {error && <p className="error">{error}</p>}
         </div>

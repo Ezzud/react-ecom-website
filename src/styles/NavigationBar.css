@@ -56,8 +56,8 @@
 }
 
 .profile-pic {
-  width: 2rem;
-  height: 2rem;
+  width: 3rem;
+  height: 3rem;
   border-radius: 9999px;
   background-color: #6b7280;
   cursor: pointer;
@@ -67,28 +67,6 @@
 .basket-icon {
   font-size: 1.5rem;
   color: white;
-}
-
-@media (max-width: 768px) {
-  .profile-pic {
-    width: 1.5rem;
-    height: 1.5rem;
-  }
-
-  .basket-icon {
-    font-size: 1.25rem;
-  }
-}
-
-@media (max-width: 576px) {
-  .profile-pic {
-    width: 1.25rem;
-    height: 1.25rem;
-  }
-
-  .basket-icon {
-    font-size: 1rem;
-  }
 }
 
 .navbar-nav {
@@ -102,11 +80,6 @@
 }
 
 @media (max-width: 576px) {
-  .navbar-nav {
-    flex-direction: column;
-    align-items: center;
-  }
-
   .nav-item {
     margin: 0 0 0.5rem 0;
   }
@@ -131,6 +104,6 @@
 }
 
 .logo {
-  height: 40px; /* Adjust the height as needed */
+  height: 64px; /* Adjust the height as needed */
   width: auto;
 }

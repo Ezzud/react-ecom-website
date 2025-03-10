@@ -31,6 +31,9 @@
 }
 
 .btn-full-width {
+  display: flex;
+  justify-content: center; /* Center items horizontally */
+  align-items: center; /* Center items vertically */
   background-color: #047857; /* Set button background color */
   color: white; /* Set button font color */
   text-transform: uppercase; /* Uppercase letters */
@@ -39,6 +42,12 @@
   padding: 10px 20px;
   width: 100%; /* Make the button take 100% of the width */
   transition: background-color 0.3s ease, color 0.3s ease;
+  position: relative; /* Ensure the icon can be positioned absolutely */
+}
+
+.btn-full-width i {
+  position: absolute; /* Position the icon absolutely */
+  right: 10px; /* Add a small margin from the right border */
 }
 
 .btn-full-width:hover {

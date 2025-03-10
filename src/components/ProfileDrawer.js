@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState, useCallback } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import '../styles/ProfileDrawer.css';
 
@@ -6,11 +6,12 @@ const ProfileDrawer = ({ visible, toggleDrawer, isLoggedIn, handleLogout, handle
   const location = useLocation();
   const drawerRef = useRef(null);
   const navigate = useNavigate();
+  const [isHiding, setIsHiding] = useState(false);
 
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (drawerRef.current && !drawerRef.current.contains(event.target)) {
-        toggleDrawer();
+        handleClose();
       }
     };
 
@@ -23,7 +24,15 @@ const ProfileDrawer = ({ visible, toggleDrawer, isLoggedIn, handleLogout, handle
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [visible, toggleDrawer]);
+  }, [visible]);
+
+  const handleClose = useCallback(() => {
+    setIsHiding(true);
+    setTimeout(() => {
+      setIsHiding(false);
+      toggleDrawer();
+    }, 300); // Match the duration of the slide-out animation
+  }, [toggleDrawer]);
 
   useEffect(() => {
     if (drawerRef.current) {
@@ -45,16 +54,17 @@ const ProfileDrawer = ({ visible, toggleDrawer, isLoggedIn, handleLogout, handle
     navigate('/admin');
   };
 
+  if (!visible && !isHiding) {
+    return null;
+  }
+
   return (
-    <div ref={drawerRef} className="offcanvas profile-drawer">
+    <div ref={drawerRef} className={`offcanvas profile-drawer ${isHiding ? 'hide' : ''}`}>
       <div className="offcanvas-header">
         <h5 className="offcanvas-title">Profile</h5>
-        <button type="button" className="close" onClick={toggleDrawer} aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div className="offcanvas-body">
-        <button className="btn btn-primary btn-block" onClick={handleSettingsRedirect}>Settings</button>
+        <button className="btn btn-settings btn-block" onClick={handleSettingsRedirect}>Settings</button>
         {user && user.isAdmin === "true" && (
           <button className="btn btn-secondary btn-block mt-2" onClick={handleAdminPanelRedirect}>Admin Panel</button>
         )}
