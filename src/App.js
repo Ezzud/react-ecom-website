@@ -62,8 +62,8 @@ const App = () => {
   };
 
   return (
-    <div className="App">
-      <main>
+    <div className="app-container">
+      <div className="app-content">
         <NavigationBar setDrawerVisibility={setDrawerVisibility} /> {/* Use the NavigationBar component */}
         <Routes>
           <Route path="/login" element={<Login />} />
@@ -78,7 +78,7 @@ const App = () => {
           <Route path="/order-confirmation" element={<OrderConfirmation user={user} />} />
           <Route path="/register" element={<Register />} />
         </Routes>
-      </main>
+      </div>
 
       <ProfileDrawer
         visible={profileDrawerVisible}
@@ -96,7 +96,7 @@ const App = () => {
         isLoggedIn={isLoggedIn}
         user={user}
       />
-      <Footer /> {/* Add the Footer component */}
+      <Footer /> {}
     </div>
   );
 };

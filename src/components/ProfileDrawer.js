@@ -8,6 +8,14 @@ const ProfileDrawer = ({ visible, toggleDrawer, isLoggedIn, handleLogout, handle
   const navigate = useNavigate();
   const [isHiding, setIsHiding] = useState(false);
 
+  const handleClose = useCallback(() => {
+    setIsHiding(true);
+    setTimeout(() => {
+      setIsHiding(false);
+      toggleDrawer();
+    }, 300); // Match the duration of the slide-out animation
+  }, [toggleDrawer]);
+
   useEffect(() => {
     const handleClickOutside = (event) => {
       if (drawerRef.current && !drawerRef.current.contains(event.target)) {
@@ -24,15 +32,7 @@ const ProfileDrawer = ({ visible, toggleDrawer, isLoggedIn, handleLogout, handle
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [visible]);
-
-  const handleClose = useCallback(() => {
-    setIsHiding(true);
-    setTimeout(() => {
-      setIsHiding(false);
-      toggleDrawer();
-    }, 300); // Match the duration of the slide-out animation
-  }, [toggleDrawer]);
+  }, [visible, handleClose]);
 
   useEffect(() => {
     if (drawerRef.current) {
