@@ -25,3 +25,24 @@
     color: inherit; /* Keep the original color on mobile */
   }
 }
+
+.preview-drawer {
+  border-radius: 8px; /* Round the corners of the ItemDetails component */
+}
+
+.btn-full-width {
+  background-color: #047857; /* Set button background color */
+  color: white; /* Set button font color */
+  text-transform: uppercase; /* Uppercase letters */
+  border-radius: 4px; /* Small round corners */
+  border: none;
+  padding: 10px 20px;
+  width: 100%; /* Make the button take 100% of the width */
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn-full-width:hover {
+  background-color: white; /* Set hover background color */
+  color: #047857; /* Set hover font color */
+  border: 1px solid #047857; /* Add border on hover */
+}

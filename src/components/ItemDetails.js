@@ -39,7 +39,7 @@ const ItemDetails = ({ item, hidePreviewDrawer, isLoggedIn, handleLoginRedirect,
           <p><strong>{item.price.toFixed(2)}€</strong></p>
           <p className="description">{item.description}</p> {/* Apply the description class */}
           <button 
-            className="btn btn-primary btn-block" 
+            className="btn-full-width" 
             onClick={handleAddToCart}
             disabled={isLoading}
           >

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Route, Routes, useNavigate, useLocation } from 'react-router-dom';
+import { Route, Routes, useNavigate } from 'react-router-dom';
 import './styles/App.css';
 import 'bootstrap-icons/font/bootstrap-icons.css';
 import Login from './pages/Login';
@@ -25,7 +25,6 @@ const App = () => {
   const [user, setUser] = useState(null);
 
   const navigate = useNavigate();
-  const location = useLocation();
 
   useEffect(() => {
     const fetchUser = async () => {

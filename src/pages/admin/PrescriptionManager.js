@@ -39,11 +39,6 @@ const PrescriptionManager = ({ user }) => {
     fetchPrescriptionsList();
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setEditedPrescription({ ...editedPrescription, [name]: value });
-  };
-
   return (
     <div className="user-manager-container">
       <DashboardMenu />

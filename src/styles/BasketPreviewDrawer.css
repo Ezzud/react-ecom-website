@@ -1,12 +1,39 @@
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideOut {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+  }
+}
+
 .basket-drawer {
   position: fixed;
-  top: 4rem; /* Adjust this value based on the height of your navigation menu */
+  top: 7rem; /* Adjust this value based on the height of your navigation menu */
   right: 0;
   width: 300px;
-  height: calc(100% - 4rem); /* Adjust this value based on the height of your navigation menu */
-  background-color: white;
+  max-height: calc(100% - 4rem - 1rem); /* Adjust this value based on the height of your navigation menu and add margin */
+  background-color: #a7bdb0;
   z-index: 1050; /* Ensure it is in front of other items except for cute-alert toasts */
   overflow-y: auto;
+  transform: translateX(100%); /* Start off-screen */
+  animation: slideIn 0.3s forwards; /* Apply the slide-in animation */
+  border-top-left-radius: 8px; /* Round the top-left corner */
+  border-bottom-left-radius: 8px; /* Round the bottom-left corner */
+  margin: 0.5rem 0; /* Add a small margin for a cleaner look */
+}
+
+.basket-drawer.hide {
+  animation: slideOut 0.3s forwards; /* Apply the slide-out animation */
 }
 
 .basket-drawer .offcanvas-header {
@@ -29,4 +56,26 @@
 .basket-drawer .basket-footer {
   padding: 1rem;
   border-top: 1px solid #dee2e6;
+}
+
+.basket-drawer .basket-total {
+  padding: 1rem;
+  border-top: 1px solid #dee2e6;
+  text-align: right;
+}
+
+.basket-drawer .btn-primary {
+  background-color: #047857; /* Set button background color */
+  color: white; /* Set button font color */
+  text-transform: uppercase; /* Uppercase letters */
+  border-radius: 4px; /* Small round corners */
+  border: none;
+  padding: 10px 20px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.basket-drawer .btn-primary:hover {
+  background-color: white; /* Set hover background color */
+  color: #047857; /* Set hover font color */
+  border: 1px solid #047857; /* Add border on hover */
 }

@@ -1,12 +1,13 @@
-import React, { useEffect, useState } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+import React, { useEffect, useState, useRef, useCallback } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { getUserBasketItems } from '../services/api';
 import '../styles/BasketPreviewDrawer.css';
 
 const BasketPreviewDrawer = ({ visible, toggleDrawer, isLoggedIn, user }) => {
   const navigate = useNavigate();
-  const location = useLocation();
   const [basketItems, setBasketItems] = useState([]);
+  const [isHiding, setIsHiding] = useState(false);
+  const drawerRef = useRef(null);
 
   useEffect(() => {
     if (visible && isLoggedIn) {
@@ -14,7 +15,33 @@ const BasketPreviewDrawer = ({ visible, toggleDrawer, isLoggedIn, user }) => {
     }
   }, [visible, isLoggedIn, user]);
 
-  if (!visible || location.pathname === '/login' || location.pathname === '/basket') {
+  const handleClose = useCallback(() => {
+    setIsHiding(true);
+    setTimeout(() => {
+      setIsHiding(false);
+      toggleDrawer();
+    }, 300); // Match the duration of the slide-out animation
+  }, [toggleDrawer]);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (drawerRef.current && !drawerRef.current.contains(event.target)) {
+        handleClose();
+      }
+    };
+
+    if (visible) {
+      document.addEventListener('mousedown', handleClickOutside);
+    } else {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [visible, handleClose]);
+
+  if (!visible && !isHiding) {
     return null;
   }
 
@@ -26,13 +53,12 @@ const BasketPreviewDrawer = ({ visible, toggleDrawer, isLoggedIn, user }) => {
     navigate('/basket');
   };
 
+  const totalPrice = basketItems.reduce((total, item) => total + item.price * item.quantity, 0);
+
   return (
-    <div className="basket-drawer">
+    <div ref={drawerRef} className={`basket-drawer ${isHiding ? 'hide' : ''}`}>
       <div className="offcanvas-header">
         <h5 className="offcanvas-title">Basket</h5>
-        <button type="button" className="close" onClick={toggleDrawer} aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
       </div>
       <div className="offcanvas-body">
         <div className="basket-items">
@@ -55,6 +81,11 @@ const BasketPreviewDrawer = ({ visible, toggleDrawer, isLoggedIn, user }) => {
             <p>Your basket is empty</p>
           )}
         </div>
+        {isLoggedIn && basketItems.length > 0 && (
+          <div className="basket-total">
+            <p>Total: <strong>{totalPrice.toFixed(2)}€</strong></p>
+          </div>
+        )}
         <div className="basket-footer">
           {isLoggedIn ? (
             <button className="btn btn-primary btn-block mt-2" onClick={handleViewFullBasket}>View Full Basket</button>
