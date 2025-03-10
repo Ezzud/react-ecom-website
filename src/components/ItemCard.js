@@ -32,6 +32,12 @@ const ItemCard = ({ item, showPreviewDrawer, updateBasket, user, toggleBasketDra
   return (
     <div className="item-card">
       <div className="item-image" style={{ backgroundImage: `url(${item.avatarURL})` }} onClick={handleShowDetails}>
+        {item.requirePrescription === true && (
+          <div className="prescription-alert">
+            <i className="bi bi-exclamation-triangle-fill"></i>
+            <span className="prescription-text">Prescription required</span>
+          </div>
+        )}
         <div className="item-price" unselectable="on">{item.price.toFixed(2)}€</div>
         <button 
           className="add-to-basket" 

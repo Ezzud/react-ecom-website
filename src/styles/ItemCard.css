@@ -36,6 +36,45 @@
   user-select: none; /* Make the price div unselectable */
 }
 
+.prescription-alert {
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  background-color: red;
+  color: white;
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+  transition: width 0.3s ease, transform 0.3s ease;
+  overflow: hidden;
+  white-space: nowrap;
+}
+
+.prescription-alert i {
+  margin-right: 0px;
+}
+
+
+
+.prescription-text {
+  display: none;
+}
+
+.item-card:hover .prescription-alert {
+  width: auto;
+  transform: scale(1.1); /* Enlarge the alert slightly */
+}
+
+.item-card:hover .prescription-alert i {
+  margin-right: 4px;
+}
+
+.item-card:hover .prescription-text {
+  display: inline;
+}
+
 .add-to-basket {
   position: absolute;
   bottom: 8px;

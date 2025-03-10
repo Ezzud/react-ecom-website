@@ -5,10 +5,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-<<<<<<< HEAD
-=======
   margin-top: auto; /* Ensure the footer is pushed to the bottom */
->>>>>>> 027acc86b356476b4958299a2ab75b76af7cb960
 }
 
 .footer-content {
