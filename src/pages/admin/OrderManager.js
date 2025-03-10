@@ -101,7 +101,7 @@ const OrderManager = ({ user }) => {
                   {editingOrderId === order.id ? (
                     <button className="btn btn-success" onClick={handleSave}>Save</button>
                   ) : (
-                    <button className="btn btn-primary" onClick={() => handleEdit(order)}>Edit</button>
+                    <button className="btn btn-edit" onClick={() => handleEdit(order)}>Edit</button>
                   )}
                   <button className="btn btn-danger" onClick={() => handleDelete(order.id)}>Delete</button>
                 </td>

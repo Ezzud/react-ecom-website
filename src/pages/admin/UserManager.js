@@ -93,7 +93,7 @@ const UserManager = ({ user }) => {
                   {editingUserId === user.id ? (
                     <button className="btn btn-success" onClick={handleSave}>Save</button>
                   ) : (
-                    <button className="btn btn-primary" onClick={() => handleEdit(user)}>Edit</button>
+                    <button className="btn btn-edit" onClick={() => handleEdit(user)}>Edit</button>
                   )}
                   <button className="btn btn-danger" onClick={() => handleDelete(user.id)}>Delete</button>
                 </td>

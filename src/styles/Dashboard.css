@@ -30,3 +30,82 @@ html, body, #root {
     padding: 20px;
     overflow-y: auto; /* Add vertical scroll if content overflows */
 }
+
+.dashboard-menu .btn-primary {
+    background-color: #047857; /* Set button background color */
+    color: white; /* Set button font color */
+    text-transform: uppercase; /* Uppercase letters */
+    border-radius: 4px; /* Small round corners */
+    border: none;
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.dashboard-menu .btn-primary:hover {
+    background-color: white; /* Set hover background color */
+    color: #047857; /* Set hover font color */
+    border: 1px solid #047857; /* Add border on hover */
+}
+
+.user-manager-container .btn {
+    text-transform: uppercase; /* Uppercase letters */
+    border-radius: 4px; /* Small round corners */
+    border: 1px solid transparent; /* Transparent border to prevent layout shift */
+    padding: 10px 20px;
+    transition: background-color 0.3s ease, color 0.3s ease, border 0.3s ease;
+}
+
+.user-manager-container .btn-edit {
+    background-color: #137ed6; /* Set button background color */
+    color: white; /* Set button font color */
+}
+
+.user-manager-container .btn-edit:hover {
+    background-color: white; /* Set hover background color */
+    color: #0f7dd8; /* Set hover font color */
+    border: 1px solid #0d7eda; /* Add border on hover */
+}
+
+.user-manager-container .btn-primary {
+    background-color: #047857; /* Set button background color */
+    color: white; /* Set button font color */
+}
+
+.user-manager-container .btn-primary:hover {
+    background-color: white; /* Set hover background color */
+    color: #047857; /* Set hover font color */
+    border: 1px solid #047857; /* Add border on hover */
+}
+
+.user-manager-container .btn-success {
+    background-color: #28a745; /* Original success button color */
+    color: white; /* Set button font color */
+}
+
+.user-manager-container .btn-success:hover {
+    background-color: white; /* Set hover background color */
+    color: #28a745; /* Set hover font color */
+    border: 1px solid #28a745; /* Add border on hover */
+}
+
+.user-manager-container .btn-danger {
+    background-color: #dc3545; /* Original danger button color */
+    color: white; /* Set button font color */
+}
+
+.user-manager-container .btn-danger:hover {
+    background-color: white; /* Set hover background color */
+    color: #dc3545; /* Set hover font color */
+    border: 1px solid #dc3545; /* Add border on hover */
+}
+
+.user-manager-container .btn-edit {
+    background-color: #007bff; /* Original edit button color */
+    color: white; /* Set button font color */
+}
+
+.user-manager-container .btn-edit:hover {
+    background-color: white; /* Set hover background color */
+    color: #007bff; /* Set hover font color */
+    border: 1px solid #007bff; /* Add border on hover */
+}

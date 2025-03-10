@@ -74,7 +74,7 @@ const PrescriptionManager = ({ user }) => {
                   {editingPrescriptionId === prescription.id ? (
                     <button className="btn btn-success" onClick={handleSave}>Save</button>
                   ) : (
-                    <button className="btn btn-primary" onClick={() => handleEdit(prescription)}>Edit</button>
+                    <button className="btn btn-edit" onClick={() => handleEdit(prescription)}>Edit</button>
                   )}
                   <button className="btn btn-danger" onClick={() => handleDelete(prescription.id)}>Delete</button>
                 </td>

@@ -1,7 +1,32 @@
 import User from '../models/User';
 const ROOT_URL = 'http://localhost:3333';
 
+/**
+ * Add a new item
+ * 
+ * @param {Object} item
+ * @returns {Promise<Object>}
+ */
+export const addItem = async (item) => {
+  try {
+    const response = await fetch(`${ROOT_URL}/items/add`, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/x-www-form-urlencoded',
+      },
+      body: new URLSearchParams(item),
+    });
 
+    if (!response.ok) {
+      throw new Error('Failed to add item');
+    }
+
+    return await response.json();
+  } catch (error) {
+    console.error('Error adding item:', error);
+    return { success: false, error: error.message };
+  }
+};
 /**
  * Create a new order
  * 
