@@ -1,5 +1,5 @@
 import User from '../models/User';
-const ROOT_URL = 'http://localhost:3333';
+const ROOT_URL = 'http://localhost:3434';
 
 /**
  * Add a new item
